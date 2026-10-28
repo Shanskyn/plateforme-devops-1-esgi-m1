@@ -1,7 +1,9 @@
 variable "nom_cluster" {
-  type = string
+  description = "Nom du cleusteur"
+  type        = string
 }
 
 variable "version_argocd" {
-  type = string
+  description = "Version du chart d'argo-cd là"
+  type        = string
 }

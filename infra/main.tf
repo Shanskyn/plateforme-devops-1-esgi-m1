@@ -1,6 +1,6 @@
 module "cluster" {
-  source = "./modules/cluster"
-  nom_cluster    = "plateforme"
+  source      = "./modules/cluster"
+  nom_cluster = var.nom_cluster
 }
 
 provider "helm" {
@@ -14,6 +14,6 @@ provider "helm" {
 
 module "argocd" {
   source        = "./modules/argocd"
-  version_chart = "10.10.3"
+  version_chart = var.version_argocd
   depends_on    = [module.cluster]
 }
