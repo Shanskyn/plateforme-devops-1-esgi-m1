@@ -1,0 +1,21 @@
+# deploy/argocd/api-dev.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: api-dev
+  namespace: argocd
+spec:
+  project: default
+  source:                                   # d'où : un dossier d'un dépôt git
+    repoURL: https://github.com/Shanskyn/plateforme-devops-1-esgi-m1.git
+    targetRevision: main
+    path: deploy/overlays/dev
+  destination:                              # vers où : un namespace d'un cluster
+    server: https://kubernetes.default.svc
+    namespace: dev
+  syncPolicy:
+    automated:
+      prune: true                           # supprime ce qui a disparu de git
+      selfHeal: true                        # annule les modifications manuelles
+    syncOptions:
+      - CreateNamespace=true
